@@ -5,6 +5,7 @@
 import numpy as np
 import pandas as pd
 from collections import defaultdict, deque
+import math
 
 # Then write the classes and/or functions you wishes to use in the exercises
 def count_bridges(adjacency_list):
@@ -99,8 +100,8 @@ def compute_betweenness(adjacency_list):
                     node_contributions[pred] += contribution
                     betweenness[pred] += contribution
 
-    # Normalize the betweenness scores (dividing by 2 for undirected graphs)
+    # Normalize the betweenness scores (dividing by 2 for undirected graphs) and convert to integer
     for node in betweenness:
-        betweenness[node] /= 2
+        betweenness[node] = round(betweenness[node] / 2)  # Use round, int, or math.ceil here as needed
     
     return betweenness
