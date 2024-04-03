@@ -30,7 +30,7 @@ def Q1(dataframe):
     # Count local bridges
     local_bridges_count = count_local_bridges(adjacency_list)
 
-    return average_degree, bridges_count, local_bridges_count
+    return [average_degree, bridges_count, local_bridges_count]
 
 
 # Undirected graph
