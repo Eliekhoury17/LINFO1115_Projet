@@ -40,22 +40,20 @@ _, all_nodes_degrees = Q1_modified(df)
 plot_degree_distribution(all_nodes_degrees)
 
 
-#Task 2
-
 def plot_cumulative_similarity(similarity_scores):
-    # Trier les scores de similarité
+    # Tri des scores de similarité
     sorted_scores = sorted(similarity_scores)
     
-    # Calculer la distribution cumulative
-    cumulative_distribution = np.arange(1, len(sorted_scores) + 1) / len(sorted_scores)
+    # Calcul de la distribution cumulative
+    cumulative_distribution = np.arange(1, len(sorted_scores) + 1) / len(sorted_scores) * 100  # Convertir en pourcentage
     
     plt.figure(figsize=(10, 6))
     plt.plot(sorted_scores, cumulative_distribution, linestyle='-', color='blue')  # Utiliser une ligne solide
-    plt.title('Distribution Cumulative des Scores de Similarité')
+    plt.title('Distribution Cumulative du Pourcentage d\'Arêtes par rapport au Score de Similarité')
     plt.xlabel('Score de Similarité')
-    plt.ylabel('Distribution Cumulative (%)')
+    plt.ylabel('Pourcentage d\'Arêtes Cumulé (%)')
     plt.grid(True)
-    plt.savefig('Distribution-Cumulative-des-Scores-de-Similarité.pdf')
+    plt.savefig('Distribution-Cumulative-du-Pourcentage-d\'Arêtes-par-rapport-au-Score-de-Similarité.pdf')
     plt.show()
 
 def Q2_modified(dataframe):
@@ -84,14 +82,10 @@ def Q2_modified(dataframe):
                     similarity_score = len(common_neighbors) / len(all_neighbors)
                     similarity_scores.append(similarity_score)
     
-    # Calculer le score de similarité moyen
-    average_similarity_score = sum(similarity_scores) / len(similarity_scores) if similarity_scores else 0.0
-    
     return similarity_scores
 
 # Générer et afficher le graphique
 plot_cumulative_similarity(Q2_modified(df))
-
 
 
 # Task 4:
