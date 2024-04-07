@@ -140,7 +140,7 @@ def Q4(dataframe):
     diameter = max(lengths)
     
     # Count occurrences of each path length
-    result = [lengths.count(i) for i in range(1, diameter + 1)]
+    result = [lengths.count(i) for i in range(0, diameter + 1)]
     
     return result
 

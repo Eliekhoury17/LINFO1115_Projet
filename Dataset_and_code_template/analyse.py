@@ -45,7 +45,7 @@ def plot_cumulative_similarity(similarity_scores):
     sorted_scores = sorted(similarity_scores)
     
     # Calcul de la distribution cumulative
-    cumulative_distribution = np.arange(1, len(sorted_scores) + 1) / len(sorted_scores) * 100  # Convertir en pourcentage
+    cumulative_distribution = np.cumsum(sorted_scores) / np.sum(sorted_scores) * 100 # Convertir en pourcentage
     
     plt.figure(figsize=(10, 6))
     plt.plot(sorted_scores, cumulative_distribution, linestyle='-', color='blue')  # Utiliser une ligne solide
