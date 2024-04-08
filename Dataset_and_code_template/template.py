@@ -110,11 +110,16 @@ def Q3(dataframe):
             new_pagerank_scores[node] = new_rank
         pagerank_scores = new_pagerank_scores
 
+    # Normalize the PageRank scores
+    sum_scores = sum(pagerank_scores.values())
+    normalized_pagerank_scores = {node: score / sum_scores for node, score in pagerank_scores.items()}
+
     # Find the node with the highest PageRank score
-    node_with_highest_pagerank = max(pagerank_scores, key=pagerank_scores.get)
-    highest_pagerank_value = pagerank_scores[node_with_highest_pagerank]
+    node_with_highest_pagerank = max(normalized_pagerank_scores, key=normalized_pagerank_scores.get)
+    highest_pagerank_value = normalized_pagerank_scores[node_with_highest_pagerank]
 
     return [node_with_highest_pagerank, highest_pagerank_value]
+
 
 # Undirected graph
 # Task 4: Small-world phenomenon
