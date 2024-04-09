@@ -19,18 +19,18 @@ def count_bridges(adjacency_list):
     def dfs(u):
         nonlocal bridges_count
         visited.add(u)
-        disc[u] = low[u] = time[0]
+        disc[u] = low[u] = time[0] # Init discovery time and low value
         time[0] += 1
 
         for v in adjacency_list[u]:
             if v not in visited:  # Tree edge
                 parent[v] = u
                 dfs(v)
-                low[u] = min(low[u], low[v])
-                if low[v] > disc[u]:
+                low[u] = min(low[u], low[v]) # Check if the subtree starting from v has done new connection to ancestor of u
+                if low[v] > disc[u]: # In that case, all subnodes generated have never been discovered and aren't reachable without passing by (u, v)
                     bridges_count += 1  # (u, v) is a bridge
-            elif v != parent.get(u):  # Back edge
-                low[u] = min(low[u], disc[v])
+            elif v != parent.get(u): # Back edge
+                low[u] = min(low[u], disc[v]) # If v has been discovered before, it means that by an other path u should be discovered sooner too
 
     for node in adjacency_list:
         if node not in visited:
@@ -46,7 +46,7 @@ def count_local_bridges(adjacency_list):
             # Remove the direct connection to consider only mutual neighbors
             mutual_neighbors.discard(src)
             mutual_neighbors.discard(dst)
-            if len(mutual_neighbors) == 0:  # No other mutual neighbors
+            if len(mutual_neighbors) == 0: # No other mutual neighbors so distance between src and dst > 2
                 local_bridges_count += 1
     # Divide by 2 because each undirected edge is counted twice
     return local_bridges_count // 2
