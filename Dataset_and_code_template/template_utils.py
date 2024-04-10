@@ -100,7 +100,8 @@ def compute_betweenness(adjacency_list):
                     node_contributions[pred] += contribution
                     betweenness[pred] += contribution
 
+    # Normalize the betweenness scores (dividing by 2 for undirected graphs) and convert to integer
     for node in betweenness:
-        betweenness[node] = round(betweenness[node] / 2)
+        betweenness[node] = round(betweenness[node] / 2)  # Use round, int, or math.ceil here as needed
     
     return betweenness
